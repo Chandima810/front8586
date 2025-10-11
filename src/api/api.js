@@ -16,15 +16,14 @@ export const addParticipant = async (participantData, files = []) => {
     });
 
     // Append files if any (backend expects 'media' field)
-    files.forEach((file) => {
-      formData.append("media", file);
-    });
+    if (files.length > 0) {
+      files.forEach((file) => formData.append("media", file));
+    }
 
     const response = await axios.post(`${API_BASE_URL}/participants`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+      headers: { "Content-Type": "multipart/form-data" },
     });
+
     return response.data;
   } catch (error) {
     console.error("❌ Error adding participant:", error);
