@@ -2,13 +2,23 @@ import React from "react";
 import ParticipantForm from "./components/ParticipantForm";
 import ParticipantList from "./components/ParticipantList";
 import RSVPForm from "./components/RSVPForm";
+import logo from "./assets/logo.jpg"; // ✅ Correct import path
 
 const App = () => {
   return (
     <div className="app-container min-h-screen flex flex-col">
       {/* Main Content with bottom padding to avoid overlap */}
-      <div className="flex-1 p-4 pb-20">
-        <h1 className="text-3xl font-bold mb-6 text-center">
+      <div className="flex-1 p-4 pb-20 text-center">
+        {/* 🟢 Logo Section */}
+        <div className="flex justify-center mb-4">
+          <img
+            src={logo}
+            alt="Batch Logo"
+            className="w-28 h-28 object-contain rounded-full shadow-md"
+          />
+        </div>
+
+        <h1 className="text-3xl font-bold mb-6">
           🎉 40th Anniversary - BSc Agriculture (85/86) Batch
         </h1>
 
@@ -17,7 +27,7 @@ const App = () => {
         <ParticipantList />
       </div>
 
-      {/* Sticky Footer with transparency and shadow */}
+      {/* Sticky Footer */}
       <footer className="w-full py-4 text-center text-sm text-gray-700 border-t bg-white/80 backdrop-blur-md fixed bottom-0 left-0 shadow-md">
         &copy; Chandima Gunasena 2025 October |{" "}
         <a
