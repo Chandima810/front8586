@@ -1,14 +1,30 @@
 import axios from "axios";
 
-// Base URL for your backend API
-const API_BASE_URL = "http://localhost:5000/api";
+// Base URL for your deployed backend API
+const API_BASE_URL = "https://back8586.onrender.com/api";
 
 // ---------------------- PARTICIPANTS ----------------------
 
-// Add a new participant
-export const addParticipant = async (participantData) => {
+// Add a new participant with optional media files
+export const addParticipant = async (participantData, files = []) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/participants`, participantData);
+    const formData = new FormData();
+
+    // Append participant fields
+    Object.keys(participantData).forEach((key) => {
+      formData.append(key, participantData[key]);
+    });
+
+    // Append files if any (backend expects 'media' field)
+    files.forEach((file) => {
+      formData.append("media", file);
+    });
+
+    const response = await axios.post(`${API_BASE_URL}/participants`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("❌ Error adding participant:", error);

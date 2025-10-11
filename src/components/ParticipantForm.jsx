@@ -7,21 +7,32 @@ const ParticipantForm = ({ onAddSuccess }) => {
     email: "",
     phone: "",
   });
+  const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    setFiles(e.target.files);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      await addParticipant(formData);
+      await addParticipant(formData, Array.from(files));
       alert("✅ Participant added successfully!");
       setFormData({ name: "", email: "", phone: "" });
+      setFiles([]);
       if (onAddSuccess) onAddSuccess();
     } catch (error) {
-      alert("❌ Failed to add participant");
       console.error(error);
+      alert("❌ Failed to add participant");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,7 +63,15 @@ const ParticipantForm = ({ onAddSuccess }) => {
           value={formData.phone}
           onChange={handleChange}
         />
-        <button type="submit">Add Participant</button>
+        <input
+          type="file"
+          multiple
+          accept="image/*,video/*"
+          onChange={handleFileChange}
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Uploading..." : "Add Participant"}
+        </button>
       </form>
     </div>
   );
