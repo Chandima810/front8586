@@ -1,7 +1,5 @@
 import axios from "axios";
-
-// Base URL for your deployed backend API
-const API_BASE_URL = "https://back8586.onrender.com/api";
+import { API_BASE_URL } from "../config.js"; // <-- make sure path matches your folder structure
 
 // ---------------------- PARTICIPANTS ----------------------
 
@@ -16,9 +14,7 @@ export const addParticipant = async (participantData, files = []) => {
     });
 
     // Append files if any (backend expects 'media' field)
-    if (files.length > 0) {
-      files.forEach((file) => formData.append("media", file));
-    }
+    files.forEach((file) => formData.append("media", file));
 
     const response = await axios.post(`${API_BASE_URL}/participants`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -55,7 +51,7 @@ export const getParticipantById = async (id) => {
 
 // ---------------------- RSVP ----------------------
 
-// Add or update RSVP
+// Add or update RSVP for a participant
 export const addOrUpdateRSVP = async (rsvpData) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/rsvp`, rsvpData);
@@ -66,7 +62,7 @@ export const addOrUpdateRSVP = async (rsvpData) => {
   }
 };
 
-// Get RSVP by participantId
+// Get RSVP by participant ID
 export const getRSVP = async (participantId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/rsvp/${participantId}`);
