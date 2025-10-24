@@ -2,7 +2,7 @@ import React from "react";
 import ParticipantForm from "./components/ParticipantForm";
 import ParticipantList from "./components/ParticipantList";
 import RSVPForm from "./components/RSVPForm";
-import logo from "./assets/logo-small.jpg"; // ✅ Correct import path
+import logo from "./assets/logo-small.png"; // ✅ Correct import path
 
 const App = () => {
   return (
