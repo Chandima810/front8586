@@ -11,12 +11,13 @@ const App = () => {
       <div className="flex-1 p-4 pb-20 text-center">
         {/* 🟢 Logo Section */}
         <div className="flex justify-center mb-4">
-          <img
-            src={logo}
-            alt="Batch Logo"
-            className="w-28 h-28 object-contain rounded-full shadow-md"
-          />
-        </div>
+  <img
+    src={logo}
+    alt="Batch Logo"
+    className="w-20 h-20 object-contain rounded-full shadow-md"
+  />
+</div>
+
 
         <h1 className="text-3xl font-bold mb-6">
           🎉 40th Anniversary - BSc Agriculture (85/86) Batch
